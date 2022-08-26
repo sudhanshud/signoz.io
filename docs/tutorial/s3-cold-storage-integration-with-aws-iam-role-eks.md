@@ -26,7 +26,9 @@ To use AWS role to configure S3 cloud storage in signoz we need to add the role 
    ```
 But just adding the AWS role arn will not complete the integration, because here we need to associate the given IAM role with a Kubernetes service account named **clickhouse-instance**. 
 
-### Following are the steps that we need to perform step by step to complete this association of AWS Role ARN with AWS EKS service account named clickhouse-instance.(For this we will configure AWS EKS, OpenID Connect (OIDC) provider, IAM Roles and service accounts.)
+Following are the steps that we need to perform step by step to complete this association of AWS Role ARN with AWS EKS service account named clickhouse-instance.
+
+For this we will configure AWS EKS, OpenID Connect (OIDC) provider, IAM Roles and service accounts
 
 1. **Go to EKS cluster and copy the OIDC provider URL.(inside green rectangle)**
 ![AWS OIDC URL](../../static/img/docs/s3-cold-storage/aws-eks-oidc-url.png)
