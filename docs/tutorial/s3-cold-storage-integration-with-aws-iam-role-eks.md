@@ -1,6 +1,6 @@
 ---
 id: s3-integration-iam-role-eks
-title: S3 Integration With AWS IAM ROLE IN AWS EKS
+title: S3 Integration With AWS IAM role in EKS
 description: Integrate S3 cold storage in aws eks with IAM Role.
 ---
 
