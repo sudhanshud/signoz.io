@@ -1,5 +1,5 @@
 ---
-id: S3-Integration-IAM-ROLE-EKS
+id: s3-integration-iam-role-eks
 title: S3 Integration With AWS IAM ROLE IN AWS EKS
 description: Integrate S3 cold storage in aws eks with IAM Role.
 ---
@@ -29,20 +29,20 @@ But just adding the AWS role arn will not complete the integration, because here
 ### Following are the steps that we need to perform step by step to complete this association of AWS Role ARN with AWS EKS service account named clickhouse-instance.(For this we will configure AWS EKS, OpenID Connect (OIDC) provider, IAM Roles and service accounts.)
 
 1. **Go to EKS cluster and copy the OIDC provider URL.(inside green rectangle)**
-![AWS OIDC URL](../../static/img/blog/2022/08/aws-eks-oidc-url.png)
+![AWS OIDC URL](../../static/img/docs/s3-cold-storage/aws-eks-oidc-url.png)
 2. **Go to AWS IAM and check if there are any IAM OIDC providers in AWS IAM for the given "CLUSTER".**
 3. **If there are no IAM OIDC providers for the given "CLUSTER", then create an IAM OIDC provider. Below are the steps to create an IAM OIDC provider.**
 
    a. Go to IAM —---> Click on the Identity Provider -----> Click On Add provider.
-   ![IAM OIDC PROVIDER](../../static/img/blog/2022/08/aws-iam-oidc-provider.png)
+   ![IAM OIDC PROVIDER](../../static/img/docs/s3-cold-storage/aws-iam-oidc-provider.png)
 
    b. Choose **openid connect** —--> Copy EKS OIDC url into **Provider URL** and click on *Get Thumbprint** ---> Enter **sts.amazonaws.com** into the **Audience** text box ---> click on **Add Provider**.
-   ![ADD OIDC PROVIDER](../../static/img/blog/2022/08/add-iam-oidc-provider.png)
+   ![ADD OIDC PROVIDER](../../static/img/docs/s3-cold-storage/add-iam-oidc-provider.png)
 
 4. **Create AWS S3 bucket for signoz cold storage.**
 
    a. Go to AWS S3 console ---> click on the **Create bucket**.
-   ![AWS S3](../../static/img/blog/2022/08/aws-s3-create.png)
+   ![AWS S3](../../static/img/docs/s3-cold-storage/aws-s3-create.png)
    b. Fill all the details like bucket name **(demo-cold-storage)**,  choose region etc and create the bucket.
       You can refere the link for more details.[AWS S3 Link](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
 
@@ -70,16 +70,16 @@ But just adding the AWS role arn will not complete the integration, because here
       ```
 6. **Create an IAM role for signoz service accounts(clickhouse-instance).**
    a. Go to AWS IAM ----> Roles ----> Create Role.
-   ![AWS IAM ROLE](../../static/img/blog/2022/08/aws-iam-role.png)
+   ![AWS IAM ROLE](../../static/img/docs/s3-cold-storage/aws-iam-role.png)
 
    b. Choose **web identity** ----> Select the above created OIDC provider from Identity provider drop down -—--> Choose **sts.amazonaws.com** from audience drop down ----> Click on Next.
-   ![AWS WEB IDENTITY](../../static/img/blog/2022/08/aws-web-identity.png)
+   ![AWS WEB IDENTITY](../../static/img/docs/s3-cold-storage/aws-web-identity.png)
 
    c. Choose the IAM S3 policy created above and click on the next button.
-   ![AWS IAM POLICY](../../static/img/blog/2022/08/aws-iam-policy.png)
+   ![AWS IAM POLICY](../../static/img/docs/s3-cold-storage/aws-iam-policy.png)
 
    d. Enter the role name **demo-cold-storage-role**, description and tags and create the role.
-   ![AWS ADD ROLE](../../static/img/blog/2022/08/aws-add-role.png)
+   ![AWS ADD ROLE](../../static/img/docs/s3-cold-storage/aws-add-role.png)
 
 7. **Now update the “overwrite-values.yaml”.**
       ```jsx
