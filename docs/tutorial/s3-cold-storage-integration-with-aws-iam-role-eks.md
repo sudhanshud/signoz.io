@@ -100,4 +100,6 @@ But just adding the AWS role arn will not complete the integration, because here
        helm --namespace platform upgrade <your release name> signoz/signoz -f overwrite-values.yaml    
    ```
 
-# Note: Kinldy change the name of aws resources as per your need.    
+:::info
+Kindly change the name of AWS resources as per your need.    
+:::
